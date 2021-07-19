@@ -8,7 +8,9 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
-  padding: 20px;
+  padding: 142px;
+  width: 500px;
+  margin: auto;
 }
 
 #search-box {
@@ -41,6 +43,23 @@ ul {
   }
   &__name {
     margin-left: 10px;
+
+    &::after {
+      // content: attr(data-title);
+      opacity: 0;
+    }
+    &:hover::after {
+      content: attr(data-title);
+      opacity: 1;
+      background-color: lightyellow;
+      display: inline-block;
+      border: solid black 1px;
+      border-radius: 10px;
+      font-size: 9px;
+      vertical-align: top;
+      padding: 2px;
+      position: absolute;
+    }
   }
 }
 

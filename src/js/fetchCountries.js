@@ -1,4 +1,6 @@
+import Notiflix from "notiflix";    
 export const fetchCountries = (name) => {
+    Notiflix.Loading.hourglass()
     let countryUrl;
     if (name) { 
         countryUrl = `https://restcountries.eu/rest/v2/name/${name}`;
@@ -8,6 +10,7 @@ export const fetchCountries = (name) => {
     }
     return fetch(countryUrl)
         .then(responce => {
+            Notiflix.Loading.remove();
             if (responce.ok) {
                 return responce.json()
             }
