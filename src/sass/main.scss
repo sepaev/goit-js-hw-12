@@ -8,9 +8,10 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
-  padding: 142px;
-  width: 500px;
-  margin: auto;
+  // padding: 142px;
+  width: 100vw;
+  margin: 150px auto;
+  display: flex;
 }
 
 #search-box {
@@ -29,7 +30,12 @@ ul {
   margin: 0;
   padding: 0;
 }
-
+.main {
+  margin: auto;
+  // text-align: center;
+  display: inline-block;
+  justify-content: center;
+}
 .country-list {
   margin-bottom: 10px;
   height: 25px;

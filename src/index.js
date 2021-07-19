@@ -9,6 +9,11 @@ refs.searchBox.addEventListener('input',
   debounce((e) => {
     onChange(e);
   }, consts.DEBOUNCE_DELAY))
+
+refs.searchBox.addEventListener('focus',
+  () => {
+   refs.searchBox.value = '';
+  });
 refs.countryList.addEventListener('click',  e => {
   refs.searchBox.value = e.target.textContent;
   onChange(e);
