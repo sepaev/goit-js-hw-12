@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "debounce": "^1.2.1",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "notiflix": "^3.0.1"
   }
 }

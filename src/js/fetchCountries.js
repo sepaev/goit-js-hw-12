@@ -12,7 +12,7 @@ export const fetchCountries = (name) => {
                 return responce.json()
             }
             else {
-                console.log("Not found");
+                // console.log("Not found");
                 return [];
             }
         })
