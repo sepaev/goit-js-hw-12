@@ -1,12 +1,13 @@
-import Notiflix from "notiflix";    
+import Notiflix from "notiflix";
+import { consts } from "./refs"
+
 export const fetchCountries = (name) => {
     Notiflix.Loading.hourglass()
     let countryUrl;
     if (name) { 
-        countryUrl = `https://restcountries.eu/rest/v2/name/${name}`;
-        countryUrl += `?fields=name;capital;population;flag;languages`;
+        countryUrl = `${consts.BASE_URL}name/${name}?fields=${consts.BASE_URL_FIELDS}`;
     } else {
-        countryUrl = `https://restcountries.eu/rest/v2/all`;
+        countryUrl = `${consts.BASE_URL}all`;
     }
     return fetch(countryUrl)
         .then(responce => {
@@ -15,7 +16,7 @@ export const fetchCountries = (name) => {
                 return responce.json()
             }
             else {
-                // console.log("Not found");
+                // Promise.reject()
                 return [];
             }
         })
