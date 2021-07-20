@@ -5,9 +5,9 @@ export const fetchCountries = (name) => {
     Notiflix.Loading.hourglass()
     let countryUrl;
     if (name) { 
-        countryUrl = `${consts.BASE_URL}name/${name}?fields=${consts.BASE_URL_FIELDS}`;
+        countryUrl = `${consts.BASE_URL}/name/${name}?fields=${consts.BASE_URL_FIELDS}`;
     } else {
-        countryUrl = `${consts.BASE_URL}all`;
+        countryUrl = `${consts.BASE_URL}/all`;
     }
     return fetch(countryUrl)
         .then(responce => {

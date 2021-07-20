@@ -1,7 +1,7 @@
 import { fetchCountries } from "./fetchCountries";
 import { refs, consts } from "./refs";
-import listTpl from '../templates/list.hbs';
-import infoTpl from '../templates/info.hbs';
+import { createlist, createOneCountry } from "./create";
+
 import Notiflix from "notiflix";    
 
 Notiflix.Notify.init({
@@ -36,44 +36,32 @@ export const onChange = e => {
         return;
     }
     fetchCountries(inputValue)
-        .then(countries => {
-            const len = countries.length;
-            if (len === 0) {
-                createlist({ error: ' ' }); //для вывода ошибки на экран
-                Notiflix.Notify.failure(consts.FAILURE_MESSAGE);
-            };
-            if (len === 1) {
-                let country = countries[0];
-                country.stringLanguages = '';
-                country.languages.forEach(lang => {
-                    country.stringLanguages += lang.name + ',';
-                });
-                country.stringLanguages = country.stringLanguages.slice(0, -1);
-                createInfo(country);
-            }
-            if (len > 1 && len <= 10) {
-                createlist(countries);
-            }
-            if (len > 10) {
-                createlist({ error: ' ' }); //для вывода ошибки на экран
-                Notiflix.Notify.info(consts.INFO_MESSAGE);
-            }
-        })
+        .then(countries => createHtml(countries))
         .catch(e => console.log(e));
 
 };
-
-
-const createlist = (obj) => {
-    if (obj.error) {
-      refs.countryList.innerHTML = `<li class="country-list__item">${obj.error}</li>`;
-        refs.countryInfo.innerHTML = '<p></p>';
-        return;
+const createHtml = countries => {
+    const len = countries.length;
+    if (len === 0) {
+        createlist({ error: ' ' }); //для вывода ошибки на экран
+        Notiflix.Notify.failure(consts.FAILURE_MESSAGE);
+    };
+    if (len > 1 && len <= 10) {
+        if (refs.searchBox.value === 'Georgia') {
+            createOneCountry(countries[0]);
+        } else {
+            createlist(countries);
+        }
     }
-      refs.countryList.innerHTML = obj.map(el => listTpl(el)).join('');
-      refs.countryInfo.innerHTML = '<p></p>';
+    if (len === 1)
+    { createOneCountry(countries[0]) };
+
+    if (len > 10) {
+        createlist({ error: ' ' }); //для вывода ошибки на экран
+        Notiflix.Notify.info(consts.INFO_MESSAGE);
+    }
 }
-const createInfo = (arr) => {
-      refs.countryInfo.innerHTML = infoTpl(arr);
-      refs.countryList.innerHTML = '<p></p>';
-}
+
+
+
+
